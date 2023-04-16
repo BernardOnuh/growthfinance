@@ -24,7 +24,7 @@ const Pool = () =>{
             <Addpool />
         </Modal>
          </>
-            <div className='bg-black border-gray-300 border-2 rounded-md  flex flex-col  w-2/3 min-h-[400px] justify-center items-center '>
+            <div className='bg-black border-gray-300 border-2 rounded-md  flex flex-col    justify-center items-center '>
                 <div className='lg:text-5xl md:text-4xl sm:text-3xl text-2xl pb-5  text-center font-bold justify-center'>
                     My Liquidity Positions
                     </div>

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Footers from '../components/Footer';
 import Swap from '../components/DApp/Swap';
+import Farm from '../components/DApp/farm';
 import DappNavbar from '../components/DApp/DappNavbar';
 import styles from '@/styles/style';
 
@@ -24,7 +25,8 @@ export default function Home() {
         </div>
         <div className={`bg-gradient-to-t from-black to-neutral-900 ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <Swap/>
+          {/*<Swap/>*/}
+          <Farm/>
         </div>
         </div>
         <div className={`bg-black ${styles.flexStart}`}>
