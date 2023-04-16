@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { dappnavLinks } from "../constants";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import Link from 'next/link';
 
 const DappNavbar = () => {
     const [active, setActive] = useState('Home');
@@ -22,9 +23,9 @@ const DappNavbar = () => {
                     } ${index === dappnavLinks.length -1 ? 'mr-0':'mr-10'}`}
                     onClick={() => setActive(nav.title)}
                     >
-                        <a href={`#${nav.id}`}>
+                        <Link href={nav.href}>
                             {nav.title}
-                        </a>
+                        </Link>
                     </li>
                 ))}
                 <li

@@ -17,22 +17,27 @@ export const dappnavLinks =[
     {
         id:'buy',
         title:'Buy with Card',
+        href:'/Dapp/Pool',
     },
     {
         id:'swap',
         title:'Swap',
+        href:'/',
     },
     {
         id:'pool',
         title:'Pool',
+        href:'/Dapp/Pool',
     },
     {
         id:'farm',
         title:'Farm',
+        href:'/Dapp/Pool',
     },
     {
         id:'vault',
         title:'Vault',
+        href:'/Dapp/Pool',
     },
 ];
 
