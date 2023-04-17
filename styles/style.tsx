@@ -13,6 +13,7 @@ const styles = {
   
     marginX: "sm:mx-16 mx-6",
     marginY: "sm:my-16 my-6",
+    collapse: "bg-neutral-900 rounded-md text-white px-5 my-5  "
   };
   
   export const layout = {

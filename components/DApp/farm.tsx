@@ -1,23 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import { Collapse } from 'antd';
+import { Collapse, theme } from 'antd';
 import styles from '@/styles/style';
 import Link from 'next/link'
 
 const Farm = () =>{
     const { Panel } = Collapse;
 
+    const { token } = theme.useToken();
+
+    const panelStyle = {
+        borderRadius:token.borderRadiusLG,
+    }
+
     const accordion = (
         <>
-        <div className='grid grid-cols-4 gap-4 items-center justify-center text-center'>
+        <div className='grid grid-cols-4 gap-4 items-center justify-center text-center text-white font-medium text-base'>
             <div className=''>
-                <img src='/2.png' width={20} height={20}/>
+                <img src='/2.png' width={40} height={40}/>
             </div>
-            <div>$1000</div>
-            <div><img src='/2.png' width={20} height={20}/>50GWR/Day</div>
+            <div
+            >
+                $1000</div>
+            <div className='sm:flex hidden '>
+                <img src='/2.png' width={40} height={40} className='inline'/>
+                <span className='py-2 ml-2'>50GWR/Day</span>
+                </div>
             <div>100%</div>
         </div>
         </>
-    )
+    );
 
 
 return(
@@ -42,8 +53,17 @@ return(
             <div>
                 <Collapse
                 bordered={false}
-                defaultActiveKey={['1']}>
-                    <Panel key={'1'} header='Lets Go' className='text-white'><p className='text-white'>ok</p></Panel>
+                defaultActiveKey={['1']}
+                >
+                    <Panel key={'1'} 
+                    showArrow={false} 
+                    header={accordion} 
+                    className={`${styles.collapse}`}
+                    style={panelStyle}>
+                        <div>
+
+                        </div>
+                    </Panel>
                 </Collapse>
             </div>
         </div>
