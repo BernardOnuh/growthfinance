@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { Collapse, theme } from 'antd';
 import styles from '@/styles/style';
 import Link from 'next/link'
+import { Web3Button } from '@thirdweb-dev/react';
 
 const Farm = () =>{
+    const [amountToStake, setAmountToStake] = useState('');
+    const [withdrawAmount, setWithdrawAmount] =useState('');
     const { Panel } = Collapse;
-
     const { token } = theme.useToken();
 
     const panelStyle = {
@@ -60,8 +62,60 @@ return(
                     header={accordion} 
                     className={`${styles.collapse}`}
                     style={panelStyle}>
-                        <div>
-
+                        <div className='md:grid md:grid-cols-2 items-center justify-center'>
+                            <div className='justify-center items-center text-center'>
+                                <p>
+                                    GWR Wallet Balance:
+                                </p>
+                                <input
+                                type='number'
+                                value={amountToStake}>
+                                </input>
+                                <Web3Button
+                                
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >Aprove</Web3Button>
+                                <Web3Button
+                                contractAddress='0x...'
+                                action={() =>{}}
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >Stake</Web3Button>
+                                <p>
+                                    Staked GWR Wallet Balance:
+                                </p>
+                                <input
+                                type='number'
+                                value={amountToStake}>
+                                </input>
+                                <Web3Button
+                                contractAddress='0x...'
+                                action={() =>{}}
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >UnStake</Web3Button>
+                            </div>
+                            <div className='justify-center items-center text-center'>
+                            <p>
+                                    STK Wallet Balance:
+                                </p>
+                                <input
+                                type='number'
+                                value={amountToStake}>
+                                </input>
+                                <Web3Button
+                                
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >Claim</Web3Button>
+                                <Web3Button
+                                contractAddress='0x...'
+                                action={() =>{}}
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >Stake</Web3Button>
+                                <Web3Button
+                                contractAddress='0x...'
+                                action={() =>{}}
+                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
+                                >Withdraw</Web3Button>
+                            </div>
                         </div>
                     </Panel>
                 </Collapse>
