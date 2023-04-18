@@ -32,12 +32,12 @@ export const dappnavLinks =[
     {
         id:'farm',
         title:'Farm',
-        href:'/Dapp/Pool',
+        href:'/Dapp/Farm',
     },
     {
         id:'vault',
         title:'Vault',
-        href:'/Dapp/Pool',
+        href:'/Dapp/Vault',
     },
 ];
 

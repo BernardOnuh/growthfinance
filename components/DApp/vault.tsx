@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Collapse, theme } from 'antd';
 import styles from '@/styles/style';
-import Link from 'next/link'
+import Link from 'next/link';
 import { Web3Button } from '@thirdweb-dev/react';
+import Vswap from './Vault/vswap';
 
-const Farm = () =>{
+const Vault = () => {
     const [amountToStake, setAmountToStake] = useState('');
     const [withdrawAmount, setWithdrawAmount] =useState('');
     const { Panel } = Collapse;
@@ -32,9 +33,8 @@ const Farm = () =>{
         </>
     );
 
-
-return(
-    <section className={`${styles.flexCenter} ${styles.paddingY}`}>
+    return(
+        <section className={`${styles.flexCenter} ${styles.paddingY}`}>
     <div className='bg-black border-gray-300 border-2 rounded-md md:w-[80%] w-[90%] min-h-fit md:grid md:grid-cols-3 gap-10 p-5'> 
         <div className='justify-center items-center bg-neutral-900 text-center rounded-md'>
             <div className='py-3 text-4xl font-bold'>
@@ -44,6 +44,9 @@ return(
             <Link href='/'>
                 View Vault
             </Link>
+            <div className='py-3'>
+                <Vswap/>
+            </div>
         </div>
         <div className='md:col-span-2 py-5 px-3'>
             <div className='grid grid-cols-4 gap-5 md:gap-4 text-center'>
@@ -124,7 +127,6 @@ return(
         </div>
     </div>   
     </section>
-)
-}
-
-export default Farm;
+);
+};
+export default Vault;
