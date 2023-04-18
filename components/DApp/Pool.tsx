@@ -24,7 +24,7 @@ const Pool = () =>{
             <Addpool />
         </Modal>
          </>
-            <div className='bg-black border-gray-300 border-2 rounded-md  flex flex-col    justify-center items-center '>
+            <div className='bg-black border-gray-300 border-2 rounded-md  flex flex-col w-2/3 min-h-[400px]   justify-center items-center '>
                 <div className='lg:text-5xl md:text-4xl sm:text-3xl text-2xl pb-5  text-center font-bold justify-center'>
                     My Liquidity Positions
                     </div>
@@ -33,7 +33,7 @@ const Pool = () =>{
                         No liquidity was found
                     </div>
                     </div>
-                <div className='flex item-center justify-between pt-5 '>
+                <div className='flex item-end justify-between pt-5 '>
                     <div className= 'bg-white text-black font-bold rounded-[10px]  cursor-pointer py-[6px] px-4 mx-10 hover:text-white hover:bg-neutral-950'
                     onClick={() => openModal()} >
                         Add</div>
