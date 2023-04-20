@@ -5,6 +5,7 @@ import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, u
 const FPanel = () => {
     const address = useAddress();
     const [usdtToStake, setUsdtToStake ] = useState('');
+    const [usdtToUnstake, setUsdtToUnstake] = useState('');
     const [ transactionSuccessful, setTransactionSuccessful ] = useState(false);
     const [amountToStake, setAmountToStake] = useState('')
     const UsdtGwrcontractAddress ='0xb57db3aEaBCf8f61f6C69bF0e876755351E48923';
@@ -56,46 +57,51 @@ const FPanel = () => {
             </Web3Button>
             )}
             </div>
-           {/* <Web3Button
-            contractAddress='0x...'
-            action={() =>{}}
-            className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-            >Stake</Web3Button>
             <p className='text-neutral-800 py-2'>
                 Staked GWR Wallet Balance:
             </p>
             <input
             type='number'
-            value={amountToStake}
+            value={usdtToUnstake}
             className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
+            onChange={(e) => setUsdtToUnstake(e.target.value)}
             placeholder='Amount to Unstake'>
             </input>
             <Web3Button
-            contractAddress='0x...'
-            action={() =>{}}
-            className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-            >UnStake</Web3Button>*/}
+            contractAddress={UsdtGwrcontractAddress}
+                action = {async(contract) => {
+                    contract.call(
+                        'unstake',
+                        [ethers.utils.parseEther(usdtToUnstake)]
+                )
+                }}
+                onError={(error) => alert('Something went wrong!')}
+            >UnStake</Web3Button>
         </div>
         <div className='justify-center items-center pt-4 text-center bg-neutral-950 rounded-md py-5 '>
-        {/*<p className='text-neutral-800 py-2'>
+        <p className='text-neutral-800 py-2'>
             STK Wallet Balance:
         </p>
-            <input
-            type='number'
-            value={amountToStake}
-            className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
-            placeholder='Amount to Withdraw'>
-            </input>
             <Web3Button
-            
+              contractAddress={UsdtGwrcontractAddress}
+                action = {async(contract) => {
+                    contract.call(
+                        'claim'
+                )
+                }}
+                onError={(error) => alert('Something went wrong!')}
             className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
             >Claim</Web3Button>
             
-            <Web3Button
-            contractAddress='0x...'
-            action={() =>{}}
-            className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-        >Withdraw</Web3Button>*/}
+           <Web3Button
+           contractAddress={UsdtGwrcontractAddress}
+                action = {async(contract) => {
+                    contract.call(
+                        'exit'
+                )
+                }}
+                onError={(error) => alert('Something went wrong!')}
+        >Withdraw All</Web3Button>
         </div>
     </div>
     )
