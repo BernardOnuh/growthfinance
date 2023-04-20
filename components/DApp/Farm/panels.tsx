@@ -5,12 +5,17 @@ import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, u
 const FPanel = () => {
     const address = useAddress();
     const [usdtToStake, setUsdtToStake ] = useState('');
+    const [ transactionSuccessful, setTransactionSuccessful ] = useState(false);
     const [amountToStake, setAmountToStake] = useState('')
     const UsdtGwrcontractAddress ='0xb57db3aEaBCf8f61f6C69bF0e876755351E48923';
     const usdtTokenAddress = '0x0f1b8a30112f6ee46930a29a37f5ac604387bd96';
     const gwrTokenAddress = '0x3c38896342BB98E95c1BeEB6389729AefAa284a1';
     const { contract } = useContract( usdtTokenAddress );
     const { mutateAsync, isLoading, error} = useContractWrite( contract, 'approve');
+    const handleSuccess = (result: any) => {
+        console.log('Transaction successful',result);
+        setTransactionSuccessful(true);
+    };
 
     return (
         <div className='md:grid md:grid-cols-2 items-center justify-center gap-5'>
@@ -27,12 +32,17 @@ const FPanel = () => {
             </input>
             <div  
             className="w-[80%] py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300">
+             {transactionSuccessful ? (
+                <div>Hi</div>
+             ):(   
             <Web3Button
             contractAddress={usdtTokenAddress}
             action = {() => mutateAsync({ args:[UsdtGwrcontractAddress , ethers.utils.parseEther(usdtToStake)]})}
             onError={(error) => alert('Something went wrong!')}
+            onSuccess = {handleSuccess}
             >Aprove
             </Web3Button>
+            )}
             </div>
            {/* <Web3Button
             contractAddress='0x...'
