@@ -3,6 +3,7 @@ import { Collapse, theme } from 'antd';
 import styles from '@/styles/style';
 import Link from 'next/link'
 import { Web3Button } from '@thirdweb-dev/react';
+import FPanel from './Farm/panels';
 
 const Farm = () =>{
     const [amountToStake, setAmountToStake] = useState('');
@@ -62,62 +63,7 @@ return(
                     header={accordion} 
                     className={`${styles.collapse}`}
                     style={panelStyle}>
-                        <div className='md:grid md:grid-cols-2 items-center justify-center gap-5'>
-                            <div className='justify-center items-center text-center bg-neutral-950 rounded-md py-5 '>
-                                <p className='text-neutral-800 py-2'>
-                                    GWR Wallet Balance:
-                                </p>
-                                <input
-                                type='number'
-                                
-                                className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
-                                placeholder='Enter amount to stake'>
-                                </input>
-                                <Web3Button
-                                className="w-[80%] py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-                                >Aprove</Web3Button>
-                                <Web3Button
-                                contractAddress='0x...'
-                                action={() =>{}}
-                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-                                >Stake</Web3Button>
-                                <p className='text-neutral-800 py-2'>
-                                    Staked GWR Wallet Balance:
-                                </p>
-                                <input
-                                type='number'
-                                value={amountToStake}
-                                className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
-                                placeholder='Amount to Unstake'>
-                                </input>
-                                <Web3Button
-                                contractAddress='0x...'
-                                action={() =>{}}
-                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-                                >UnStake</Web3Button>
-                            </div>
-                            <div className='justify-center items-center pt-4 text-center bg-neutral-950 rounded-md py-5 '>
-                            <p className='text-neutral-800 py-2'>
-                                STK Wallet Balance:
-                            </p>
-                                <input
-                                type='number'
-                                value={amountToStake}
-                                className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
-                                placeholder='Amount to Withdraw'>
-                                </input>
-                                <Web3Button
-                                
-                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-                                >Claim</Web3Button>
-                                
-                                <Web3Button
-                                contractAddress='0x...'
-                                action={() =>{}}
-                                className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
-                                >Withdraw</Web3Button>
-                            </div>
-                        </div>
+                        <FPanel/>
                     </Panel>
                 </Collapse>
             </div>
