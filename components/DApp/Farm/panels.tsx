@@ -31,7 +31,7 @@ const FPanel = () => {
             placeholder='Enter amount to stake'>
             </input>
             <div  
-            className="w-[80%] py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300">
+            className="w-[80%] py-2 px-2 font-medium text-white bg-white rounded transition duration-300 items-center justify-center">
              {transactionSuccessful ? (
                 <div>Hi</div>
              ):(   
