@@ -33,7 +33,17 @@ const FPanel = () => {
             <div  
             className="w-[80%] py-2 px-2 font-medium text-white bg-white rounded transition duration-300 items-center justify-center">
              {transactionSuccessful ? (
-                <div>Hi</div>
+                <Web3Button
+                contractAddress={UsdtGwrcontractAddress}
+                action = {(contract) => {
+                    contract.call(
+                        'stake',
+                        ethers.utils.parseEther(usdtToStake)
+                )
+                }}
+                >
+                    Stake
+                </Web3Button>
              ):(   
             <Web3Button
             contractAddress={usdtTokenAddress}
