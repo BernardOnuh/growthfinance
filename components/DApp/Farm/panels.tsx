@@ -11,18 +11,49 @@ const FPanel = () => {
     const UsdtGwrcontractAddress ='0xb57db3aEaBCf8f61f6C69bF0e876755351E48923';
     const usdtTokenAddress = '0x0f1b8a30112f6ee46930a29a37f5ac604387bd96';
     const gwrTokenAddress = '0x3c38896342BB98E95c1BeEB6389729AefAa284a1';
-    const { contract } = useContract( usdtTokenAddress );
-    const { mutateAsync, isLoading, error} = useContractWrite( contract, 'approve');
+    const { contract } = useContract( UsdtGwrcontractAddress );
     const handleSuccess = (result: any) => {
         console.log('Transaction successful',result);
         setTransactionSuccessful(true);
     };
+    const { contract:usdtToken, isLoading:isusdtTokenLoading} = useContract(usdtTokenAddress);
+    const { contract:gwrToken, isLoading:isgwrTokenLoading} = useContract(gwrTokenAddress);
+    const { data: usdtTokenBalance, refetch: refetchusdtTokenBalance } = useTokenBalance(usdtToken, address);
+    const { data: gwrTokenBalance, refetch: refetchgwrTokenBalance } = useTokenBalance(gwrToken, address);
+    const {
+        data:balanceinfo,
+        refetch: refetchBalanceInfo,
+        isLoading: isBalanceLoading,
+    } = useContractRead( contract, 'balanceOf', [address]);
+    const {
+        data:earnedinfo,
+        refetch: refetchEarnedInfo,
+        isLoading: isEarnedInfoLoading,
+    } = useContractRead( contract, 'earned', [address]);
+
+    useEffect(() => {
+        setInterval(() => {
+          refetchData();
+        }, 10000);
+      }, []);
+
+     const refetchData = () => {
+        refetchusdtTokenBalance();
+        refetchgwrTokenBalance();
+        refetchBalanceInfo();
+        refetchEarnedInfo();
+
+     }; 
+
 
     return (
         <div className='md:grid md:grid-cols-2 items-center justify-center gap-5'>
         <div className='justify-center items-center text-center bg-neutral-950 rounded-md py-5 '>
             <p className='text-neutral-800 py-2'>
-                GWR Wallet Balance:
+                GWR Wallet Balance: 
+                <span id='balance'>
+                    {usdtTokenBalance?.displayValue}
+                </span>
             </p>
             <input
             type='number'
@@ -43,14 +74,18 @@ const FPanel = () => {
                 )
                 }}
                 onError={(error) => alert('Something went wrong!')}
-                onSuccess={(result) => alert("Success!")}
                 >
                     Stake
                 </Web3Button>
              ):(   
             <Web3Button
             contractAddress={usdtTokenAddress}
-            action = {() => mutateAsync({ args:[UsdtGwrcontractAddress , ethers.utils.parseEther(usdtToStake)]})}
+            action = {(contract) => {
+                contract.call(
+                    'approve',
+                    [ethers.utils.parseEther(usdtToStake)]
+            )
+            }}
             onError={(error) => alert('Something went wrong!')}
             onSuccess = {handleSuccess}
             >Aprove
@@ -59,6 +94,9 @@ const FPanel = () => {
             </div>
             <p className='text-neutral-800 py-2'>
                 Staked GWR Wallet Balance:
+                <span id='balance'>
+                    {balanceinfo?.displayValue}
+                </span>
             </p>
             <input
             type='number'
@@ -80,7 +118,10 @@ const FPanel = () => {
         </div>
         <div className='justify-center items-center pt-4 text-center bg-neutral-950 rounded-md py-5 '>
         <p className='text-neutral-800 py-2'>
-            STK Wallet Balance:
+            GWR Earned Balance:
+            <span id='balance'>
+                    {earnedinfo?.displayValue}
+                </span>
         </p>
             <Web3Button
               contractAddress={UsdtGwrcontractAddress}
@@ -93,6 +134,12 @@ const FPanel = () => {
             className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
             >Claim</Web3Button>
             
+            <p className='text-neutral-800 py-2'>
+            GWR Wallet Balance:
+            <span id='balance'>
+                    {gwrTokenBalance?.displayValue}
+                </span>
+            </p>
            <Web3Button
            contractAddress={UsdtGwrcontractAddress}
                 action = {async(contract) => {
