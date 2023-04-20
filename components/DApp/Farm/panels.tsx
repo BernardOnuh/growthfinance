@@ -38,9 +38,11 @@ const FPanel = () => {
                 action = {(contract) => {
                     contract.call(
                         'stake',
-                        ethers.utils.parseEther(usdtToStake)
+                        [ethers.utils.parseEther(usdtToStake)]
                 )
                 }}
+                onError={(error) => alert('Something went wrong!')}
+                onSuccess={(result) => alert("Success!")}
                 >
                     Stake
                 </Web3Button>
