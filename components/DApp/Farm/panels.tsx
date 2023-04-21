@@ -83,7 +83,7 @@ const FPanel = () => {
             action = {(contract) => {
                 contract.call(
                     'approve',
-                    [ethers.utils.parseEther(usdtToStake)]
+                    [UsdtGwrcontractAddress, ethers.utils.parseEther(usdtToStake)]
             )
             }}
             onError={(error) => alert('Something went wrong!')}
@@ -95,7 +95,7 @@ const FPanel = () => {
             <p className='text-neutral-800 py-2'>
                 Staked GWR Wallet Balance:
                 <span id='balance'>
-                    {balanceinfo?.displayValue}
+                    {balanceinfo && ethers.utils.formatEther(balanceinfo.toString())}
                 </span>
             </p>
             <input
@@ -120,7 +120,7 @@ const FPanel = () => {
         <p className='text-neutral-800 py-2'>
             GWR Earned Balance:
             <span id='balance'>
-                    {earnedinfo?.displayValue}
+                    {earnedinfo && ethers.utils.formatEther(earnedinfo .toString())}
                 </span>
         </p>
             <Web3Button
