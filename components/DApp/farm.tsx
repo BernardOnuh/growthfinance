@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { Collapse, theme } from 'antd';
 import styles from '@/styles/style';
-import Link from 'next/link'
-import { Web3Button } from '@thirdweb-dev/react';
+import Link from 'next/link';
 import FPanel from './Farm/panels';
+import Mgwr from './Farm/maticgwr';
+import Gmatic from './Farm/gwrmatic';
+
 
 const Farm = () =>{
-    const [amountToStake, setAmountToStake] = useState('');
-    const [withdrawAmount, setWithdrawAmount] =useState('');
     const { Panel } = Collapse;
     const { token } = theme.useToken();
 
@@ -64,6 +64,20 @@ return(
                     className={`${styles.collapse}`}
                     style={panelStyle}>
                         <FPanel/>
+                    </Panel>
+                    <Panel key={'2'} 
+                    showArrow={false} 
+                    header={accordion} 
+                    className={`${styles.collapse}`}
+                    style={panelStyle}>
+                        <Mgwr/>
+                    </Panel>
+                    <Panel key={'3'} 
+                    showArrow={false} 
+                    header={accordion} 
+                    className={`${styles.collapse}`}
+                    style={panelStyle}>
+                        <Gmatic/>
                     </Panel>
                 </Collapse>
             </div>
