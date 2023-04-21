@@ -2,23 +2,23 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, useTokenBalance, useContractRead } from '@thirdweb-dev/react'
 
-const Mgwr = () => {
+const Gxgwr = () => {
     const address = useAddress();
-    const [maticToStake, setMaticToStake ] = useState('');
-    const [maticToUnstake, setMaticToUnstake] = useState('');
+    const [gwrToStake, setGwrToStake ] = useState('');
+    const [xgwrToUnstake, setXgwrToUnstake] = useState('');
     const [ transactionSuccessful, setTransactionSuccessful ] = useState(false);
     const [amountToStake, setAmountToStake] = useState('')
-    const MaticGwrcontractAddress ='0x2916174A2515058bA91f68da91EE99A7400E391C';
-    const maticTokenAddress = "0x39d48205B0bFd3dD1C1CEb6F248D52D26aBaFE6a";
+    const GwrXgwrcontractAddress ='0x0234060d497574D2aE1D5B2CBbbEAaa290e256e9';
+    const xgwrTokenAddress = "0xb67cFbaa405861D4eF3832Ef56eB95D0e338433d";
     const gwrTokenAddress = '0x3c38896342BB98E95c1BeEB6389729AefAa284a1';
-    const { contract } = useContract( MaticGwrcontractAddress );
+    const { contract } = useContract( GwrXgwrcontractAddress );
     const handleSuccess = (result: any) => {
         console.log('Transaction successful',result);
         setTransactionSuccessful(true);
     };
-    const { contract:maticToken, isLoading:ismaticTokenLoading} = useContract(maticTokenAddress);
+    const { contract:xgwrToken, isLoading:isxgwrTokenLoading} = useContract(xgwrTokenAddress);
     const { contract:gwrToken, isLoading:isgwrTokenLoading} = useContract(gwrTokenAddress);
-    const { data: maticTokenBalance, refetch: refetchusdtTokenBalance } = useTokenBalance(maticToken, address);
+    const { data: xgwrTokenBalance, refetch: refetchusdtTokenBalance } = useTokenBalance(xgwrToken, address);
     const { data: gwrTokenBalance, refetch: refetchgwrTokenBalance } = useTokenBalance(gwrToken, address);
     const {
         data:balanceinfo,
@@ -50,15 +50,15 @@ const Mgwr = () => {
         <div className='md:grid md:grid-cols-2 items-center justify-center gap-5'>
         <div className='justify-center items-center text-center bg-neutral-950 rounded-md py-5 '>
             <p className='text-neutral-800 py-2'>
-                Matic Wallet Balance: 
+                GWR Wallet Balance: 
                 <span id='balance'>
-                    {maticTokenBalance?.displayValue}
+                    {gwrTokenBalance?.displayValue}
                 </span>
             </p>
             <input
             type='number'
-            value={maticToStake}
-            onChange={(e) => setMaticToStake(e.target.value)}
+            value={gwrToStake}
+            onChange={(e) => setGwrToStake(e.target.value)}
             className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
             placeholder='Enter amount to stake'>
             </input>
@@ -66,11 +66,11 @@ const Mgwr = () => {
             className='py-2'>
              {transactionSuccessful ? (
                 <Web3Button
-                contractAddress={MaticGwrcontractAddress}
+                contractAddress={GwrXgwrcontractAddress}
                 action = {(contract) => {
                     contract.call(
                         'stake',
-                        [ethers.utils.parseEther(maticToStake)]
+                        [ethers.utils.parseEther(gwrToStake)]
                 )
                 }}
                 onError={(error) => alert('Something went wrong!')}
@@ -79,11 +79,11 @@ const Mgwr = () => {
                 </Web3Button>
              ):(   
             <Web3Button
-            contractAddress={maticTokenAddress}
+            contractAddress={gwrTokenAddress}
             action = {(contract) => {
                 contract.call(
                     'approve',
-                    [MaticGwrcontractAddress, ethers.utils.parseEther(maticToStake)]
+                    [GwrXgwrcontractAddress, ethers.utils.parseEther(gwrToStake)]
             )
             }}
             onError={(error) => alert('Something went wrong!')}
@@ -93,24 +93,24 @@ const Mgwr = () => {
             )}
             </div>
             <p className='text-neutral-800 py-2'>
-                Staked Matic Wallet Balance:
+                Staked GWR Wallet Balance:
                 <span id='balance'>
                     {balanceinfo && ethers.utils.formatEther(balanceinfo.toString())}
                 </span>
             </p>
             <input
             type='number'
-            value={maticToUnstake}
+            value={xgwrToUnstake}
             className='w-[80%] text-white px-3 py-3 rounded-md bg-neutral-900 hover:shadow'
-            onChange={(e) => setMaticToUnstake(e.target.value)}
+            onChange={(e) => setXgwrToUnstake(e.target.value)}
             placeholder='Amount to Unstake'>
             </input>
             <Web3Button
-            contractAddress={MaticGwrcontractAddress}
+            contractAddress={GwrXgwrcontractAddress}
                 action = {async(contract) => {
                     contract.call(
                         'unstake',
-                        [ethers.utils.parseEther(maticToUnstake)]
+                        [ethers.utils.parseEther(xgwrToUnstake)]
                 )
                 }}
                 onError={(error) => alert('Something went wrong!')}
@@ -118,13 +118,13 @@ const Mgwr = () => {
         </div>
         <div className='justify-center items-center pt-4 text-center bg-neutral-950 rounded-md py-5 '>
         <p className='text-neutral-800 py-2'>
-            GWR Earned Balance:
+            XGWR Earned Balance:
             <span id='balance'>
                     {earnedinfo && ethers.utils.formatEther(earnedinfo .toString())}
                 </span>
         </p>
             <Web3Button
-              contractAddress={MaticGwrcontractAddress}
+              contractAddress={GwrXgwrcontractAddress}
                 action = {async(contract) => {
                     contract.call(
                         'claim'
@@ -135,13 +135,13 @@ const Mgwr = () => {
             >Claim</Web3Button>
             
             <p className='text-neutral-800 py-2'>
-            GWR Wallet Balance:
+            XGWR Wallet Balance:
             <span id='balance'>
-                    {gwrTokenBalance?.displayValue}
+                    {xgwrTokenBalance?.displayValue}
                 </span>
             </p>
            <Web3Button
-           contractAddress={MaticGwrcontractAddress}
+           contractAddress={GwrXgwrcontractAddress}
                 action = {async(contract) => {
                     contract.call(
                         'exit'
@@ -154,4 +154,4 @@ const Mgwr = () => {
     )
 }
 
-export default Mgwr;
+export default Gxgwr;

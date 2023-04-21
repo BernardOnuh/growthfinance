@@ -50,7 +50,7 @@ const FPanel = () => {
         <div className='md:grid md:grid-cols-2 items-center justify-center gap-5'>
         <div className='justify-center items-center text-center bg-neutral-950 rounded-md py-5 '>
             <p className='text-neutral-800 py-2'>
-                GWR Wallet Balance: 
+                USDT Wallet Balance: 
                 <span id='balance'>
                     {usdtTokenBalance?.displayValue}
                 </span>
@@ -63,7 +63,7 @@ const FPanel = () => {
             placeholder='Enter amount to stake'>
             </input>
             <div  
-            className="w-[80%] py-2 px-2 font-medium text-white bg-white rounded transition duration-300 items-center justify-center">
+            className="">
              {transactionSuccessful ? (
                 <Web3Button
                 contractAddress={UsdtGwrcontractAddress}
@@ -93,7 +93,7 @@ const FPanel = () => {
             )}
             </div>
             <p className='text-neutral-800 py-2'>
-                Staked GWR Wallet Balance:
+                Staked USDT Wallet Balance:
                 <span id='balance'>
                     {balanceinfo && ethers.utils.formatEther(balanceinfo.toString())}
                 </span>

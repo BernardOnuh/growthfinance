@@ -118,7 +118,7 @@ const GMatic = () => {
         </div>
         <div className='justify-center items-center pt-4 text-center bg-neutral-950 rounded-md py-5 '>
         <p className='text-neutral-800 py-2'>
-            GWR Earned Balance:
+            Matic Earned Balance:
             <span id='balance'>
                     {earnedinfo && ethers.utils.formatEther(earnedinfo .toString())}
                 </span>
@@ -135,7 +135,7 @@ const GMatic = () => {
             >Claim</Web3Button>
             
             <p className='text-neutral-800 py-2'>
-            GWR Wallet Balance:
+            Matic Wallet Balance:
             <span id='balance'>
                     {maticTokenBalance?.displayValue}
                 </span>
