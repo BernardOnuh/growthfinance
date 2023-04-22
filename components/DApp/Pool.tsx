@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import Addpool from './Addpool';
+import AddLiquidity from './Addpool';
 import {Modal} from 'antd';
 import styles from '@/styles/style';
 
@@ -21,7 +21,7 @@ const Pool = () =>{
         footer={null}
         onCancel ={() => setIsOpen(false)}
         title = 'AddLiquidity'>
-            <Addpool />
+            <AddLiquidity />
         </Modal>
          </>
             <div className='bg-black border-gray-300 border-2 rounded-md  flex flex-col w-2/3 min-h-[400px]   justify-center items-center '>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Web3Button, useAddress, useTokenBalance, useContract } from '@thirdweb-dev/react';
+import { ethers } from 'ethers';
 import { Input, Popover, Radio, Modal, message } from 'antd';
 import { ArrowDownOutlined, DownOutlined, SettingOutlined } from '@ant-design/icons';
 import tokenList from './tokenList.json';
@@ -7,28 +9,27 @@ import styles from '@/styles/style';
 interface prices{
     ratio:number;
   }
-const Addpool = () =>{
+const AddLiquidity = () =>{
     const [ slippage, setSlippage] = useState(2.5);
     const [ isOpen, setIsOpen ] = useState(false);
+    const address = useAddress();
+    const RouterAddress = '0x1647E996A78970035b6E41656AA1B2dF0dAD584b';
     const [ tokenOneAmount, setTokenOneAmount] =useState('')
     const [ tokenTwoAmount, setTokenTwoAmount] =useState('')
     const [tokenOne, setTokenOne]=useState(tokenList[0]);
     const [tokenTwo, setTokenTwo]=useState(tokenList[1]);
     const [changeToken, setChangeToken]=useState(1);
     const [prices, setPrices] = useState<prices| null>(null);
+    const [completedActions, setCompletedActions] = useState<string[]>([]);
+    const handleSuccess = (result: string) => {
+    console.log('Transaction successful',result);
+    setCompletedActions([...completedActions, result]);}
 
     function handleSlippageChange(e:any) {
        setSlippage(e.target.value); 
     }
 
-    function changeAmount(e:any){
-        setTokenOneAmount(e.target.value);
-        if(e.target.value && prices?.ratio){
-            setTokenTwoAmount(Number((e.target.value * prices.ratio)).toFixed(2))
-        }else{
-            setTokenTwoAmount('');
-        }
-    }
+    
 
 
     function openModal(asset:any) {
@@ -59,11 +60,25 @@ const Addpool = () =>{
 
     }
 
+    const {contract:one, isLoading:oneLoading} =useContract(tokenOne.address)
+    const {contract:two, isLoading:twoLoading} = useContract(tokenTwo.address)
+    const {data:tokenOneBal, refetch:refecthTokenOneBal} =useTokenBalance( one , address);
+    const {data:tokenTwoBal, refetch:refecthTokenTwoBal} =useTokenBalance(two , address);
+
     useEffect(()=>{
 
         fetchPrices(tokenList[0].address, tokenList[1].address)
     }, [])
 
+    useEffect(() =>{
+        setInterval(() =>{
+        refetchData();    
+        }, 10000);
+    }, []);
+    const refetchData =() => {
+        refecthTokenOneBal();
+        refecthTokenTwoBal();
+    }
     const settings = (
         <>
          <div> Slippage Tolerance </div>
@@ -120,10 +135,12 @@ const Addpool = () =>{
                 <Input
                 placeholder ='0'  
                 value= {tokenOneAmount}
-                onChange={changeAmount}
-                disabled= {!prices}
+                onChange={(e) => setTokenOneAmount(e.target.value)}
                 />
-              <Input placeholder='0' value={tokenTwoAmount} disabled={true} />
+                <span>balance: {tokenOneBal?.displayValue}</span>
+
+              <Input placeholder='0' value={tokenTwoAmount}
+               onChange={(e) => setTokenTwoAmount(e.target.value)}/><span>balance: {tokenTwoBal?.displayValue}</span>
               <div className='bg-black w-[25px] h-[25px] items-center justify-center flex rounded-md absolute top-[86px] left-[180px] text-sm duration-300 hover:text-white hover:cursor-pointer'>
               <ArrowDownOutlined className='font-bold text-white'/>
             </div>
@@ -139,13 +156,92 @@ const Addpool = () =>{
                 {tokenTwo.ticker}
                 <DownOutlined className='font-bold text-white' />
             </div>
-            <div className='flex justify-center items-center bg-white w-[100%] h-[55px] text-xl rounded-md text-black font-bold my-5 duration-300 hover:bg-neutral-950 hover:text-white'>
-                AddLiquidity
-            </div>
+            
+            <div
+            className='flex justify-center items-center bg-white w-[100%] h-[55px] '>
+      {!completedActions.includes('approve1') && (
+        <Web3Button
+          contractAddress={tokenOne.address}
+          action={async (contract) => {
+            contract.call(
+              'approve',
+              [RouterAddress, ethers.utils.parseEther(tokenOneAmount)]
+            )
+          }}
+          onSuccess={() => handleSuccess('approve1')}
+        >
+          Approve {tokenOne.ticker}
+        </Web3Button>
+      )}
+
+      {completedActions.includes('approve1') && !completedActions.includes('approve2') && (
+        <Web3Button
+          contractAddress={tokenTwo.address}
+          action={async (contract) => {
+            contract.call(
+              'approve',
+              [RouterAddress, ethers.utils.parseEther(tokenTwoAmount)]
+            )
+          }}
+          onSuccess={() => handleSuccess('approve2')}
+        >
+          Approve {tokenTwo.ticker}
+        </Web3Button>
+      )}
+
+      {completedActions.includes('approve1') && completedActions.includes('approve2') && !completedActions.includes('addLiquidity') && (
+        <Web3Button
+          contractAddress={RouterAddress}
+          action={async (contract) => {
+            contract.call(
+              'addLiquidity',
+              [
+                tokenOne.address,
+                tokenTwo.address,
+                ethers.utils.parseEther(tokenOneAmount),
+                ethers.utils.parseEther(tokenOneAmount),
+                '1',
+                '1',
+                address,
+                '10000000000'
+              ]
+            )
+          }}
+          onSuccess={() => handleSuccess('addLiquidity')}
+        >
+          Add Liquidity
+        </Web3Button>
+      )}
+
+      {completedActions.includes('addLiquidity') && (
+        <Web3Button
+        contractAddress={RouterAddress}
+        action={async (contract) => {
+          contract.call(
+            'addLiquidity',
+            [
+              tokenOne.address,
+              tokenTwo.address,
+              ethers.utils.parseEther(tokenOneAmount),
+              ethers.utils.parseEther(tokenOneAmount),
+              '1',
+              '1',
+              address,
+              '10000000000'
+            ]
+          )
+        }}
+        onSuccess={() => handleSuccess('addLiquidity')}
+      >
+        Add Liquidity
+      </Web3Button>
+      )}
+    </div>
+
          </div>
          </div>
         </section>
     );
 };
 
-export default Addpool;
+export default AddLiquidity;
