@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Web3Button, useAddress, useTokenBalance, useContract } from '@thirdweb-dev/react';
+import { ethers } from 'ethers';
 import { Input, Popover, Radio, Modal, message } from 'antd';
 import { ArrowDownOutlined, DownOutlined, SettingOutlined } from '@ant-design/icons';
 import tokenList from './tokenList.json';
@@ -9,6 +11,8 @@ interface prices{
   }
 const Swap = () =>{
     const [ slippage, setSlippage] = useState(2.5);
+    const address = useAddress();
+    const RouterAddress = '0x1647E996A78970035b6E41656AA1B2dF0dAD584b';
     const [ isOpen, setIsOpen ] = useState(false);
     const [ tokenOneAmount, setTokenOneAmount] =useState('')
     const [ tokenTwoAmount, setTokenTwoAmount] =useState('')
@@ -68,12 +72,26 @@ const Swap = () =>{
         
 
     }
+    const {contract:one, isLoading:oneLoading} =useContract(tokenOne.address)
+    const {contract:two, isLoading:twoLoading} = useContract(tokenTwo.address)
+    const path = (tokenOne.address,tokenTwo.address)
+    const {data:tokenOneBal, refetch:refecthTokenOneBal} =useTokenBalance( one , address);
+    const {data:tokenTwoBal, refetch:refecthTokenTwoBal} =useTokenBalance(two , address);
 
     useEffect(()=>{
 
         fetchPrices(tokenList[0].address, tokenList[1].address)
     }, [])
 
+    useEffect(() =>{
+        setInterval(() =>{
+        refetchData();    
+        }, 10000);
+    }, []);
+    const refetchData =() => {
+        refecthTokenOneBal();
+        refecthTokenTwoBal();
+    }
     const settings = (
         <>
          <div> Slippage Tolerance </div>
@@ -130,10 +148,11 @@ const Swap = () =>{
                 <Input
                 placeholder ='0'  
                 value= {tokenOneAmount}
-                onChange={changeAmount}
-                disabled= {!prices}
+                onChange={(e) => setTokenOneAmount(e.target.value)}
                 />
+                <span>balance: {tokenOneBal?.displayValue}</span>
               <Input placeholder='0' value={tokenTwoAmount} disabled={true} />
+              <span>balance: {tokenTwoBal?.displayValue}</span>
               <div className='bg-black w-[25px] h-[25px] items-center justify-center flex rounded-md absolute top-[86px] left-[180px] text-sm duration-300 hover:text-white hover:cursor-pointer'>
               <ArrowDownOutlined className='font-bold text-white'/>
             </div>
@@ -149,8 +168,19 @@ const Swap = () =>{
                 {tokenTwo.ticker}
                 <DownOutlined className='font-bold text-white' />
             </div>
-            <div className='flex justify-center items-center bg-white w-[100%] h-[55px] text-xl rounded-md text-black font-bold my-5 duration-300 hover:bg-neutral-950 hover:text-white'>
-                SWAP
+            <div className='flex justify-center items-center w-[100%] h-[55px] text-xl rounded-md text-black font-bold my-5'>
+            <Web3Button
+            contractAddress={RouterAddress}
+            action= {async(contract) =>{
+                contract.call(
+                    'swapExactTokensForTokens',
+                    [ethers.utils.parseEther(tokenOneAmount),'1',[tokenOne.address,tokenTwo.address],address,'100000000000']
+                )
+            }}
+            onError ={(error) => alert('something Went wrong!')}
+            >
+                Swap
+            </Web3Button>
             </div>
          </div>
          </div>
