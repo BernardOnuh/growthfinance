@@ -37,7 +37,7 @@ body {
   height: 96px !important;
   margin-bottom: 5px;
   font-size: 35px;
-  z-index: -1;
+  z-index:auto;
   border-radius: 12px !important;
 }
 
@@ -94,7 +94,7 @@ body {
   border: 1px solid #030304;
   width: 400px !important;
   border-radius: 10px;
-  z-index: -1;
+  z-index:auto;
 }
 
 .ant-modal-header {

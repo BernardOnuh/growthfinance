@@ -43,7 +43,7 @@ const DappNavbar = () => {
                 <div
                 className={`${
                 !toggle ?'hidden':'flex'
-                } p-6 z-0 bg-black border-white border-2 absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
+                } p-6 block bg-black border-white border-2 absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
                     <ul className="list-none flex justify-end items-start flex-1 flex-col">
                         {dappnavLinks.map((nav,index) =>(
                             <li

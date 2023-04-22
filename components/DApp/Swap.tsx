@@ -132,7 +132,7 @@ const Swap = () =>{
                 })}
             </div>
          </Modal>
-         <div className='bg-black border-gray-200 border-2 rounded-md justify-start flex flex-col item-start px-5 w-[400px] -z-5 min-h-[300px]'>
+         <div className='bg-black border-gray-200 border-2 rounded-md justify-start flex flex-col item-start px-5 w-[400px] min-h-[300px]'>
             <div className='flex item-center justify-between w-[98%] py-3'>
                 <h4 className='text-xl'>Swap</h4>
                 <Popover 
