@@ -94,6 +94,7 @@ body {
   border: 1px solid #030304;
   width: 400px !important;
   border-radius: 10px;
+  z-index: -1;
 }
 
 .ant-modal-header {
