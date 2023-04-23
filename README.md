@@ -4,6 +4,10 @@ Growth Finance is the future of Banks it gives you the ability to SAVE and INVES
 
 Website: [here](https://growthfinance.vercel.app/)
 
+
+https://user-images.githubusercontent.com/114490070/233846993-dc4bb745-a5d6-4a8f-bea5-bb4f7851b93d.mp4
+
+
 ## Getting Started
 Growth Finance Compises of alot of features which are
 - Swap
@@ -16,6 +20,7 @@ Understand more on how Growth Finance work [here](https://growth-finance.gitbook
 ## Breakdown of how  Growth was bult and how you can recrete it.
 
 ### Swap and Liquidity Pool
+
 - Front-End
 
 I used Next Js and react components like antd design with tailwind for the styling.
@@ -23,13 +28,23 @@ Check it Out [here](https://github.com/BernardOnuh/growthfinance/blob/main/pages
 
 - BackEnd
  Bunzz made it possible for me to use a factory template and also build and import my own Router Contract.
+ 
+ 
 
 ### Farm and Vault
+
+
+https://user-images.githubusercontent.com/114490070/233847120-c2f85e8c-a634-41dc-85ac-4675a753a9b5.mp4
+
 
 - Front-End
 
 I used Next Js and react components like antd design with tailwind for the styling.
 Check it Out [here](https://github.com/BernardOnuh/growthfinance/blob/main/pages/Dapp)
+
+
+https://user-images.githubusercontent.com/114490070/233847423-3f70c151-c6ef-4dca-b68b-8d727bd14b6b.mp4
+
 
 - BackEnd
  Bunzz made it possible for me to use a staking template.
@@ -42,6 +57,14 @@ Check it Out [here](https://github.com/BernardOnuh/growthfinance/blob/main/pages
  - Alchemy
 
 ## RUN GROWTHFI LOCALLY
+
+To Operate This DAPP you would be needing Test Matic:
+
+Here: https://mumbaifaucet.com/
+
+Request For GWR TOKENS
+
+Here : https://mumbai.polygonscan.com/token/0x3c38896342bb98e95c1beeb6389729aefaa284a1
 
 First, run the development server:
 
