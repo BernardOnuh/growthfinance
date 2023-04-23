@@ -33,34 +33,6 @@ const DappNavbar = () => {
                     <ConnectWallet/>
                 </li>
             </ul>
-            <div className="sm:hidden flex flex-1 justify-end items-center">
-                <img
-                src={toggle ? '/close.svg':'/menu.svg'}
-                alt='menu'
-                className="w-[28px] h-[28px] object-contain"
-                onClick={() => setToggle(!toggle)}
-                />
-                <div
-                className={`${
-                !toggle ?'hidden':'block'
-                } p-6 block bg-black border-white border-2 absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
-                    <ul className="list-none flex justify-end items-start flex-1 flex-col">
-                        {dappnavLinks.map((nav,index) =>(
-                            <li
-                            key={nav.id}
-                            className={`cursor-pointer text-[16px] ${
-                                active === nav.title ? 'text-white': 'text-dimWhite'}
-                                ${index === dappnavLinks.length -1? 'mb-0':'mb-4'}`}>
-                                    <a href={`#${nav.id}`}>{nav.title}</a>
-                            </li>
-                        ))}
-                        <li
-                        className="p-5 w-124">
-                            <ConnectWallet/>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </nav>
     );
 };
