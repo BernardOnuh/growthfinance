@@ -20,14 +20,14 @@ const Vault = () => {
         <>
         <div className='grid grid-cols-4 gap-4 items-center justify-center text-center text-white font-medium text-base'>
             <div className=''>
-                <img src='/2.png' width={40} height={40}/>
+                <img src='/GxGWR.png' width={40} height={40}/>
             </div>
             <div
             >
-                $1000</div>
+                $1250</div>
             <div className='sm:flex hidden '>
-                <img src='/2.png' width={40} height={40} className='inline'/>
-                <span className='py-2 ml-2'>50GWR/Day</span>
+                <img src='/GxGWR.png' width={40} height={40} className='inline'/>
+                <span className='py-2 ml-2'>500GWR/Day</span>
                 </div>
             <div>100%</div>
         </div>
