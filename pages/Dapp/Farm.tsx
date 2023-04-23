@@ -33,7 +33,7 @@ export default function Farms() {
             <div className='font-semibold'>Pool</div>
           </Link>
           <Link href='/Dapp/Vault'>
-            <div className='font-semibold'>tVaul</div>
+            <div className='font-semibold'>Vault</div>
           </Link>
          </div>
         <div className={`bg-black ${styles.flexStart}`}>

@@ -158,7 +158,7 @@ const AddLiquidity = () =>{
             </div>
             
             <div
-            className='flex justify-center items-center bg-white w-[100%] h-[55px] '>
+            className='flex justify-center items-center  w-[100%] h-[55px] '>
       {!completedActions.includes('approve1') && (
         <Web3Button
           contractAddress={tokenOne.address}

@@ -32,7 +32,7 @@ export default function Fpool() {
           <Link href='/'>
             <div className='font-semibold'>Swap</div>
           </Link>
-          <Link href='/Dapp/Vault'>
+          <Link href='/Dapp/Farm'>
             <div className='font-semibold'>Farm</div>
           </Link>
          </div>
