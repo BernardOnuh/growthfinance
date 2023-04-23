@@ -30,10 +30,10 @@ export default function Home() {
         </div>
         </div>
         <div className='sm:hidden flex  item-end justify-between p-5  '>
-          <Link href=''>
+          <Link href='/'>
             <div className='font-semibold'>Home</div>
           </Link>
-          <Link href=''>
+          <Link href='/Dapp/Pool'>
             <div className='font-semibold'>Addliquidity</div>
           </Link>
          </div>
