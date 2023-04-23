@@ -1,4 +1,4 @@
-import DappNavbar from './DappNavbar';
+import DappNavbar from './Header/DappNavbar';
 import Swap from './Swap';
 
 export {

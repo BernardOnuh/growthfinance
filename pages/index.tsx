@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from "next/link";
 import Footers from '../components/Footer';
 import Swap from '../components/DApp/Swap';
 import Farm from '../components/DApp/farm';
@@ -28,6 +29,14 @@ export default function Home() {
           <Swap/>
         </div>
         </div>
+        <div className='sm:hidden flex  item-end justify-between p-5  '>
+          <Link href=''>
+            <div className='font-semibold'>Home</div>
+          </Link>
+          <Link href=''>
+            <div className='font-semibold'>Addliquidity</div>
+          </Link>
+         </div>
         <div className={`bg-black ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
         <Footers/>

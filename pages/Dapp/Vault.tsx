@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Footers from '@/components/Footer';
 import Vault from '@/components/DApp/vault';
 import DappNavbar from '@/components/DApp/DappNavbar';
@@ -10,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Growth Finance</title>
+        <title>Growth Finance Vault</title>
         <meta name="description" content="Taking over the World of Finance" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.png" />
@@ -27,6 +28,14 @@ export default function Home() {
           <Vault/>
         </div>
         </div>
+        <div className='sm:hidden flex  item-end justify-between p-5  '>
+          <Link href='/Dapp/Farm'>
+            <div className='font-semibold'>Farm</div>
+          </Link>
+          <Link href=''>
+            <div className='font-semibold'>Read Docs</div>
+          </Link>
+         </div>
         <div className={`bg-black ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
         <Footers/>
