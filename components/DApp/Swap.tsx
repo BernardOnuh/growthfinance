@@ -174,7 +174,7 @@ const Swap = () =>{
             action= {async(contract) =>{
                 contract.call(
                     'swapExactTokensForTokens',
-                    [[ethers.utils.parseEther(tokenOneAmount)],'1',[tokenOne.address,tokenTwo.address],address,'100000000000']
+                    [ethers.utils.parseEther(tokenOneAmount),'1',[tokenOne.address,tokenTwo.address],address,'100000000000']
                 )
             }}
             onError ={(error) => alert('something Went wrong!')}
