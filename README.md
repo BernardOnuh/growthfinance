@@ -56,6 +56,14 @@ https://user-images.githubusercontent.com/114490070/233847423-3f70c151-c6ef-4dca
  - Next Js
  - Alchemy
 
+ # SMART CONTRACT USED
+ - Tokens
+ - Router
+ - Factory
+ - Farm
+
+ some of the smart contracts can be found [here](https://github.com/BernardOnuh/growthfinance/tree/main/contracts)
+
 ## RUN GROWTHFI LOCALLY
 
 To Operate This DAPP you would be needing Test Matic:
